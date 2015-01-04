@@ -42,7 +42,10 @@
             for (var i = 0; i < devices.length; i++) {
                 if (devices[i].deviceType == 'door-lock') {
                     db.setItem('doorDeviceGuid', devices[i].deviceGuid);
+                    $("#face").show();
                     $("#unlockDoorButton").show();
+                } else if (devices[i].deviceType == 'smart-plug') {
+                    db.setItem('lightDeviceGuid', devices[i].deviceGuid);
                 }
             }
         },
@@ -68,12 +71,37 @@
         dataType: 'text',
         contentType: 'application/json;charset=UTF-8',
         success: function(data, textStatus, jqXHR) {
-            alert(JSON.stringify(data));
+            alert("Door Unlocked: " + textStatus);
+            turnOnLights();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(errorThrown);
         }
     });
+  }
+  
+  var turnOnLights = function(event) {
+    $.ajax({
+        type: "POST",
+        url: db.getItem('url')
+             + '/api/' + db.getItem('gatewayGUID')
+             + '/devices/' + db.getItem('lightDeviceGuid')
+             + '/switch',
+        headers: { 
+            'Appkey': db.getItem('appKey'),
+            'Authtoken': db.getItem('authToken'),
+            'Requesttoken': db.getItem('requestToken')
+        },
+        data: 'on',
+        dataType: 'text',
+        contentType: 'application/json;charset=UTF-8',
+        success: function(data, textStatus, jqXHR) {
+//            alert("Door Unlocked: " + textStatus);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });      
   }
         
   function register_event_handlers()

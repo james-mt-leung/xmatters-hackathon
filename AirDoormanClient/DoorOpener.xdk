@@ -6,7 +6,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.jsapp",
       "src": "appDesigner",
       "projectGuid": "1d7d190d-7050-450b-9eec-abc93afc6905",
-      "lastModifiedDate": 1420322395262,
+      "lastModifiedDate": 1420361346671,
       "creationDate": 1420322395185
     },
     "XDK-app-designer": "true",
@@ -46,6 +46,17 @@
         "selectedState": "Included",
         "data": {},
         "paramvals": {}
+      },
+      {
+        "id": "cordova-webintent",
+        "version": "",
+        "selectedState": "Included",
+        "data": {},
+        "paramvals": {},
+        "custom": "true",
+        "name": "cordova-webintent",
+        "origin": "https://github.com/Initsogar/cordova-webintent.git",
+        "originType": "repo"
       }
     ],
     "buildConfigurations": {
